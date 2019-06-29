@@ -2,7 +2,8 @@ from  apiapp.models import Api
 from .serializers import ApiSerializer
 from rest_framework import viewsets
 from rest_framework.decorators import action
-
+from rest_framework.authentication import TokenAuthentication
+from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 
 class ApiViewset(viewsets.ModelViewSet):
@@ -10,6 +11,8 @@ class ApiViewset(viewsets.ModelViewSet):
 
     queryset = Api.objects.all()
     serializer_class = ApiSerializer
+    authentication_classes = (TokenAuthentication,)
+    permission_classes = (IsAuthenticated,)
 
 
     #method=get
