@@ -1,4 +1,4 @@
-from  .models import Api
+from  apiapp.models import Api
 from .serializers import ApiSerializer
 from rest_framework import viewsets
 from rest_framework.decorators import action
