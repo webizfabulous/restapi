@@ -16,6 +16,8 @@ class ApiViewset(viewsets.ModelViewSet):
 
 
     #method=get
+    #use this newest in url 
+    #whatever comes inside view set we can use as a url name
     @action(methods=['get'] , detail=False) #detail=false means dont show this view on detail view
     def newest(self,request):
         newest = self.get_queryset().order_by('created').last() #gettting the last created model
