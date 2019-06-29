@@ -5,6 +5,10 @@ from rest_framework.response import Response
 from rest_framework import status #importing status
 from .serializers import ApiSerializer
 
+
+
+#get for Get method
+#post for post method
 #adding methods
 @api_view(['GET' , "POST"])
 def api_list(request):
@@ -21,5 +25,19 @@ def api_list(request):
             return Response(serializer.data , status=status.HTTP_201_CREATED)
         #else if the serializer is not valid return request error with code 400
         return Response(serializer.errors , status=status.HTTP_400_BAD_REQUEST)
+
+
+
+#this is get
+#it helps to get data
+@api_view(['GET'])
+def api_detail(request , index_id):
+    try: #try
+        #if obj is available
+        obj = Api.objects.get(pk=index_id)
+    except Api.DoesNotExist: #if Api doesnot exist
+        return Response(status=status.HTTP_404_NOT_FOUND) #return 404 not found
+    serializer = ApiSerializer(obj) #passing which we wanna serialize
+    return Response(serializer.data) #.data returns serialized data
 
 
